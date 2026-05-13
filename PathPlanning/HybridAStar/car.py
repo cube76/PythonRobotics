@@ -56,7 +56,9 @@ def rectangle_check(x, y, yaw, ox, oy):
         tx = iox - x
         ty = ioy - y
         converted_xy = np.stack([tx, ty]).T @ rot
-        rx, ry = converted_xy[0], converted_xy[1]
+        # Cast to plain float to avoid numpy ambiguous truth-value errors
+        # when ox/oy are numpy arrays or converted_xy elements are 0-d ndarrays.
+        rx, ry = float(converted_xy[0]), float(converted_xy[1])
 
         if not (rx > LF or rx < -LB or ry > W / 2.0 or ry < -W / 2.0):
             return False  # collision
