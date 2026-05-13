@@ -279,7 +279,15 @@ def hybrid_a_star_planning(start, goal, ox, oy, xy_resolution, yaw_resolution):
                         calc_index(start_node, config)))
     final_path = None
 
+    iter_count = 0
+    max_iter = 10000
+
     while True:
+        iter_count += 1
+        if iter_count > max_iter:
+            print("Error: Max iterations exceeded, path is blocked.")
+            return Path([], [], [], [], 0)
+
         if not openList:
             print("Error: Cannot find path, No open set")
             return Path([], [], [], [], 0)
