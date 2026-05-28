@@ -76,7 +76,7 @@ class RRTStarReedsShepp(RRTStar):
 
         self.node_list = [self.start]
         for i in range(self.max_iter):
-            print("Iter:", i, ", number of nodes:", len(self.node_list))
+            # print("Iter:", i, ", number of nodes:", len(self.node_list))
             rnd = self.get_random_node()
             nearest_ind = self.get_nearest_node_index(self.node_list, rnd)
             new_node = self.steer(self.node_list[nearest_ind], rnd)
@@ -195,7 +195,7 @@ class RRTStarReedsShepp(RRTStar):
         for (i, node) in enumerate(self.node_list):
             if self.calc_dist_to_goal(node.x, node.y) <= self.goal_xy_th:
                 goal_indexes.append(i)
-        print("goal_indexes:", len(goal_indexes))
+        # print("goal_indexes:", len(goal_indexes))
 
         # angle check
         final_goal_indexes = []
@@ -203,7 +203,7 @@ class RRTStarReedsShepp(RRTStar):
             if abs(self.node_list[i].yaw - self.end.yaw) <= self.goal_yaw_th:
                 final_goal_indexes.append(i)
 
-        print("final_goal_indexes:", len(final_goal_indexes))
+        # print("final_goal_indexes:", len(final_goal_indexes))
 
         if not final_goal_indexes:
             return None
